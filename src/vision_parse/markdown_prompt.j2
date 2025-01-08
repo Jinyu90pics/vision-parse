@@ -1,0 +1,49 @@
+{% autoescape true %}
+
+Your task is to analyze the given image and extract textual content in markdown format.
+
+{% if confidence_score_text is defined and confidence_score_text|float > 0.6 %}
+- Verify if the extracted text matches with the content in the image:\n\n```markdown\n{{ extracted_text|escape|trim }}\n```\n\n
+- Ensure markdown text formatting for the extracted text is applied properly by analyzing the image.
+- Strictly do not change any content in the original extracted text while applying markdown formatting and do not repeat the extracted text.
+{% else %}
+- Analyze this image carefully and extract all the content from the provided image in markdown format.
+- Ensure markdown text formatting for extracted text is applied properly by analyzing the image.
+- Strictly do not change any content in the original extracted text while applying markdown formatting and do not repeat the extracted text.
+{% endif %}
+
+{% if tables_detected is defined and tables_detected|string == "Yes" %}
+- If tables are detected, preserve the tabular structure in markdown format using | for columns and - for the header row separator.
+- Ensure that the cell values are properly aligned within the table columns and the tabular data is not distorted.
+- Ensure that the column and rows are properly aligned, strictly no misalignment is allowed.
+- For columns containing shift codes, validate values against the following list:
+  S1, S2, S3, S4, S5, S6, S7, S8, S9, S10,
+  S1+, S2+, S3+, S4+, S5+, S6+, S7+, S8+, S9+, S10+,
+  AL, MC, UL, TO, OT, sAL, ALa, ALp, ALh
+- For arrival and departure time columns, format time values to HH:mm (24-hour format).
+- For the "No. of Working Hours" column, convert values to float or double.
+- Maintain the original positioning of the table within the scanned document. Strictly do not include any additional explanations or comments.
+{% endif %}
+
+{% if latex_equations_detected is defined and latex_equations_detected|string == "Yes" %}
+- If latex equations are detected, preserve the inline math equations and block math equations in LaTeX format using math symbols, superscripts, subscripts, and other LaTeX formatting.
+- If inline equations are detected, strictly enclose them in single dollar signs i.e. $...$ and if block equations are detected, strictly enclose them in double dollar signs i.e. $$...$$.
+- Strictly ensure that the LaTeX formatting is valid. Strictly do not include any additional explanations or comments.
+{% endif %}
+
+- Strictly preserve markdown text formatting if present such as horizontal lines, header levels, footers, bullet points, links/urls, or other markdown elements.
+- Strictly, do not omit any textual content from the markdown formatted extracted text.
+- Strictly do not include any additional explanations or comments in the markdown formatted extracted text.
+- Strictly do not generate code fences or backticks like ``` or ```markdown.
+
+{% if custom_prompt is defined and custom_prompt is not none %}
+{{ custom_prompt|string }}
+{% endif %}
+
+{# Shift code definitions for reference:
+S1, S2, S3, S4, S5, S6, S7, S8, S9, S10,
+S1+, S2+, S3+, S4+, S5+, S6+, S7+, S8+, S9+, S10+,
+AL, MC, UL, TO, OT, sAL, ALa, ALp, ALh
+#}
+
+{% endautoescape %}
