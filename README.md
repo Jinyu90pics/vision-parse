@@ -8,6 +8,8 @@
 
 ## 🎯 Introduction
 
+Original Repository: https://github.com/iamarunbrahma/vision-parse
+
 Vision Parse harnesses the power of Vision Language Models to revolutionize document processing:
 
 - 📝 **Scanned Document Processing**: Intelligently identifies and extracts text, tables, and LaTeX equations from scanned documents into markdown-formatted content with high precision
