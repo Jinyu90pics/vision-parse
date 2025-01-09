@@ -1,7 +1,17 @@
 from flask import Flask, request, jsonify
-from vision_parse import VisionParser
+from src.vision_parse import VisionParser
 import os
 import json
+import logging
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    print('没有找到dotenv模块,需要安装: pip install dotenv')
+    exit()
+    
+load_dotenv()
+
 
 app = Flask(__name__)
 
@@ -16,7 +26,7 @@ parser = VisionParser(
     detailed_extraction=True,
 )
 
-import logging
+
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/', methods=['POST'])

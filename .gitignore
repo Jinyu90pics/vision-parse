@@ -12,6 +12,7 @@ wheels/
 # Environment variables
 .env
 .env.*
+.bash_history
 
 # Virtual environments
 .venv/

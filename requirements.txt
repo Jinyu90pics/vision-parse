@@ -1,0 +1,10 @@
+flask
+fitz
+frontend
+python-dotenv
+requests
+
+
+
+
+
