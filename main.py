@@ -9,9 +9,9 @@ app = Flask(__name__)
 parser = VisionParser(
     model_name="gemini-1.5-flash",  # Replace with your actual model name if different
     api_key=os.environ.get("GEMINI_API_KEY"), # Get API key from environment variable
-    temperature=0.9,
+    temperature=0.2,
     top_p=0.4,
-    max_output_tokens=2048,
+    max_output_tokens=8192,
     image_mode="url",
     detailed_extraction=True,
 )
