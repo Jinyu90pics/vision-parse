@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from src.vision_parse import VisionParser
 import os
-import json
 import logging
 
 try:
