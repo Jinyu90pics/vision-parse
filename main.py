@@ -23,6 +23,8 @@ parser = VisionParser(
     max_output_tokens=8192,
     image_mode="url",
     detailed_extraction=True,
+    enable_concurrency=True,
+    num_workers=4,  # Set to desired number of workers
 )
 
 
