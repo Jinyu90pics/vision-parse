@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # Initialize parser (from gemini_demo.ipynb, adapt as needed)
 parser = VisionParser(
-    model_name="gemini-1.5-pro",  # Replace with your actual model name if different
+    model_name="gemini-1.5-flash",  # Replace with your actual model name if different
     api_key=os.environ.get("GEMINI_API_KEY"), # Get API key from environment variable
     temperature=0.2,
     top_p=0.4,
