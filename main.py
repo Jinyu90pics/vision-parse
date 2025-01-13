@@ -6,7 +6,7 @@ import logging
 try:
     from dotenv import load_dotenv
 except ImportError:
-    print('没有找到dotenv模块,需要安装: pip install dotenv')
+    print('dotenv module is not found and needs to install: pip install dotenv')
     exit()
     
 load_dotenv()
