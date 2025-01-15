@@ -8,6 +8,12 @@ Your task is to analyze the given image and extract textual content in markdown 
 - Strictly do not change any content in the original extracted text while applying markdown formatting and do not repeat the extracted text.
 {% else %}
 - Analyze this image carefully and extract all the content from the provided image in markdown format.
+- Strictly preserve the structure of the table:
+  - The number of rows and columns in the output **must match** the table in the image.
+  - For merged cells, use row and column spanning but do not shift or split adjacent rows/columns.
+- Align all table rows and columns exactly as they appear in the image.
+- Do not infer additional rows, columns, or split cells unless explicitly instructed.
+- Maintain the original table’s layout, including header and body rows.
 - Ensure markdown text formatting for extracted text is applied properly by analyzing the image.
 - Strictly do not change any content in the original extracted text while applying markdown formatting and do not repeat the extracted text.
 {% endif %}
@@ -15,7 +21,6 @@ Your task is to analyze the given image and extract textual content in markdown 
 {% if tables_detected is defined and tables_detected|string == "Yes" %}
 - If tables are detected, preserve the tabular structure in markdown format using | for columns and - for the header row separator.
 - Ensure that the cell values are properly aligned within the table columns and the tabular data is not distorted.
-- Ensure that the column and rows are properly aligned, strictly no misalignment is allowed. If there are no physical boarders, don't separate them into two columns.
 - For columns in the shift codes, limit values within following list:
   S1, S2, S3, S4, S5, S6, S7, S8, S9, S10,
   S1+, S2+, S3+, S4+, S5+, S6+, S7+, S8+, S9+, S10+,
