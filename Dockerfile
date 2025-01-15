@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 RUN apt update && apt install libgl1-mesa-glx libglib2.0-0 gcc -y
