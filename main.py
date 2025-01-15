@@ -61,9 +61,17 @@ def process_file():
         logging.info(f"File removed: {temp_path}")
 
         # Format output as JSON
+        # Validate and adjust table structure in markdown pages
         output = []
         for i, page_content in enumerate(markdown_pages):
-            output.append({"page": i+1, "content": page_content})
+            # Example validation: Ensure the same number of columns in each row
+            rows = page_content.split('\n')
+            if len(rows) > 1:  # Skip validation for empty or single-row tables
+                column_counts = [len(row.split('|')) for row in rows if '|' in row]
+                if len(set(column_counts)) > 1:
+                    print(f"Warning: Misaligned table detected on page {i + 1}")
+
+            output.append({"page": i + 1, "content": page_content})
 
         return jsonify(output)
 
