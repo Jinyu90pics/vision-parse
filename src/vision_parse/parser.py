@@ -101,7 +101,21 @@ class VisionParser:
 
             # Convert image to base64 for LLM processing
             base64_encoded = base64.b64encode(pix.tobytes("png")).decode("utf-8")
-            return await self.llm.generate_markdown(base64_encoded, pix, page_number)
+            
+            # Add metadata about table structure
+            metadata = {
+                "rows": detected_row_count,  # Replace with the actual detected row count
+                "columns": detected_column_count,  # Replace with the actual detected column count
+            }
+
+            # Pass metadata as part of the custom prompt
+            custom_prompt = f"""
+            - The table in the image contains {metadata['rows']} rows and {metadata['columns']} columns. Align the Markdown output to match this structure.
+            """
+
+            return await self.llm.generate_markdown(
+                base64_encoded, pix, page_number, custom_prompt=custom_prompt
+            )
 
         except Exception as e:
             raise VisionParserError(
