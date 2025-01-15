@@ -33,10 +33,10 @@ class ImageData:
                 255,
                 cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                 cv2.THRESH_BINARY_INV,
-                11,
-                2,
+                15,
+                8,
             )
-            return cv2.morphologyEx(binary, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+            return cv2.morphologyEx(binary, cv2.MORPH_CLOSE, np.ones((2, 2), np.uint8))
         except Exception as e:
             raise ImageExtractionError(f"Image detection failed: {str(e)}")
 
