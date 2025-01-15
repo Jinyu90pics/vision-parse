@@ -23,6 +23,7 @@ parser = VisionParser(
     max_output_tokens=8192,
     image_mode="url",
     detailed_extraction=True,
+    enable_concurrency=True,
 )
 
 
