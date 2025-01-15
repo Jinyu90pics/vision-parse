@@ -7,4 +7,4 @@ COPY . /app/
 RUN pip install -r requirements.txt
 RUN pip install 'vision-parse[gemini]'
 EXPOSE 5000
-CMD ["python3", "main.py"] 
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "4", "--threads", "2", "main:app"]
